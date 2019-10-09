@@ -1,7 +1,8 @@
-import React, { useEffect, useState, FC } from 'react';
-import { Props } from './hotel-collection.props';
+import React, { FC, useEffect, useState } from 'react';
+
+import { Hotel } from '../../common/interfaces/hotel.interface';
 import { HotelCard } from './components/hotel-card.component';
-import { Hotel } from './hotel-collection.interface';
+import { Props } from './hotel-collection.props';
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -12,16 +13,17 @@ const useStyles = makeStyles({
   },
 });
 
-export const HotelCollectionComponent: FC<Props> = ({ loading, hotelCollection }: Props) => {
-  //const [isLoading] = useState(loading);
+export const HotelCollectionComponent: FC<Props> = ({
+  editHotel,
+  loading,
+  hotelCollection,
+}: Props) => {
   const classes = useStyles();
-
-  useEffect(() => console.log(loading));
 
   return (
     <div className={classes.listLayout}>
       {hotelCollection.map((hotel: Hotel) => (
-        <HotelCard hotel={hotel} key={hotel.id} />
+        <HotelCard hotel={hotel} key={hotel.id} editHotel={editHotel} />
       ))}
     </div>
   );

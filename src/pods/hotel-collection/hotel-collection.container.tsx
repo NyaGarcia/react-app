@@ -1,13 +1,21 @@
-import React, { useState, useEffect, FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+
+import { Hotel } from '../../common/interfaces/hotel.interface';
 import { HotelCollectionComponent } from './hotel-collection.component';
-import { Hotel } from './hotel-collection.interface';
 import { getHotelCollection } from './hotel-collection.api';
+import { loadingComponent } from 'common/utils/loading.hoc';
 import { mapFromAToBCollection } from 'common/utils';
 import { mapFromApiToVm } from './hotel-collection.mapper';
-import { loadingComponent } from 'common/utils/loading.hoc';
-import { Props } from './hotel-collection.props';
+import { routesLinks } from 'core';
 
-export const HotelCollectionContainer = () => {
+interface Props extends RouteComponentProps {}
+
+export const HotelCollectionContainer = (props: Props) => {
+  const editHotel = (id: string) => {
+    props.history.push(routesLinks.hotelEdit(id));
+  };
+
   const useHotelCollectionData = () => {
     const [hotelCollection, setHotelCollection] = useState<Array<Hotel>>([]);
     const [isError, setIsError] = useState(false);
@@ -35,5 +43,5 @@ export const HotelCollectionContainer = () => {
   const [{ hotelCollection, isError, isLoading }] = useHotelCollectionData();
   const Component: FC<Props> = loadingComponent(HotelCollectionComponent);
 
-  return <Component loading={isLoading} hotelCollection={hotelCollection} />;
+  return <Component editHotel={editHotel} loading={isLoading} hotelCollection={hotelCollection} />;
 };
