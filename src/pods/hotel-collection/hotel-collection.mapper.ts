@@ -1,6 +1,6 @@
-import { HotelEntityApi } from './hotel-collection-api.interface';
-import { Hotel } from './hotel-collection.interface';
 import { BASE_URL } from 'common/constants';
+import { Hotel } from '../../common/interfaces/hotel.interface';
+import { HotelEntityApi } from './hotel-collection-api.interface';
 
 export const mapFromApiToVm = ({
   id,
