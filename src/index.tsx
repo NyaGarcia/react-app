@@ -1,9 +1,9 @@
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import { HotelCollectionPage, LoginPage } from 'scenes';
+import { HotelCollectionPage, HotelEditPage, LoginPage } from 'scenes';
+import { SessionProvider, routerSwitchRoutes } from 'core';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { routerSwitchRoutes, SessionProvider } from 'core';
 
 const root = document.getElementById('root');
 ReactDOM.render(
@@ -12,6 +12,7 @@ ReactDOM.render(
       <Switch>
         <Route exact path={routerSwitchRoutes.main} component={LoginPage} />
         <Route path={routerSwitchRoutes.hotelCollection} component={HotelCollectionPage} />
+        <Route path={routerSwitchRoutes.hotelEdit} component={HotelEditPage} />
       </Switch>
     </HashRouter>
   </SessionProvider>,
