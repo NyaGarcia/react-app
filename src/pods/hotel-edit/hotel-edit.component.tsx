@@ -6,12 +6,13 @@ import { Grid } from '@material-ui/core';
 import { Props } from './hotel-edit.props.interface';
 import React from 'react';
 
-export const HotelEdit = ({ hotel, cities }: Props) => {
+export const HotelEdit = ({ hotel, cities, validate }: Props) => {
   const submit = () => {};
 
   return (
     <Form
       onSubmit={submit}
+      validate={validate}
       render={({ handleSubmit, form, pristine, submitting }) => (
         <form onSubmit={handleSubmit} noValidate>
           <Grid container spacing={2}>
@@ -35,11 +36,11 @@ export const HotelEdit = ({ hotel, cities }: Props) => {
               />
             </Grid>
             <Grid item xs={6}>
-              <Select name='cities' label='Cities' />
+              <Select name='cities' label='Cities' options={cities} value={hotel.name} />
             </Grid>
             <Grid item xs={6}>
               <Button color='primary' type='submit' variant='contained' disabled={submitting}>
-                Submit
+                Save
               </Button>
             </Grid>
             <Grid item xs={6}>
