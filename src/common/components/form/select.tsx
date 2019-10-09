@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography/Typography';
 interface Props {
   name: string;
   label: string;
-  onChange: (id: string, value: any) => void;
   value: string;
   options: Array<City>;
   error?: string;
@@ -16,22 +15,11 @@ interface Props {
   isDisabled?: boolean;
 }
 
-const onTextFieldChange = (fieldId: string, onChange: (fieldId, value) => void) => e => {
-  onChange(fieldId, e.target.value);
-};
-
 export const Select: FC<Props> = props => {
-  const { name, label, onChange, value, error, type = 'text', options, isDisabled = false } = props;
+  const { label, value, error, type = 'text', options, isDisabled = false } = props;
   return (
     <>
-      <TextField
-        label={label}
-        value={value}
-        type={type}
-        select={true}
-        onChange={onTextFieldChange(name, onChange)}
-        disabled={isDisabled}
-      >
+      <TextField label={label} value={value} type={type} select={true} disabled={isDisabled}>
         {options.map(({ name }) => (
           <MenuItem key={name} value={name}>
             {name}
