@@ -1,23 +1,25 @@
-import React from 'react';
-import Card from '@material-ui/core/Card';
-import { Hotel } from '../hotel-collection.interface';
-import CardHeader from '@material-ui/core/CardHeader/CardHeader';
-import Avatar from '@material-ui/core/Avatar/Avatar';
-import IconButton from '@material-ui/core/IconButton/IconButton';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
 import {
+  CardActions,
   CardContent,
   CardMedia,
-  Typography,
-  CardActions,
-  makeStyles,
   Theme,
+  Typography,
+  makeStyles,
 } from '@material-ui/core';
+
+import Avatar from '@material-ui/core/Avatar/Avatar';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader/CardHeader';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import { Hotel } from '../../../common/interfaces/hotel.interface';
+import IconButton from '@material-ui/core/IconButton/IconButton';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import React from 'react';
 
 interface Props {
   hotel: Hotel;
+  editHotel: (id: string) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -36,9 +38,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const HotelCard = (props: Props) => {
+export const HotelCard = ({ hotel, editHotel }: Props) => {
   const classes = useStyles();
-  const { hotel } = props;
 
   return (
     <Card className={classes.card}>
@@ -61,7 +62,7 @@ export const HotelCard = (props: Props) => {
         </div>
       </CardContent>
       <CardActions>
-        <IconButton aria-label='Add to favorites'>
+        <IconButton aria-label='Add to favorites' onClick={() => editHotel(hotel.id)}>
           <EditIcon />
         </IconButton>
         <IconButton aria-label='Share'>
